@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{%  block bodyPart %}
+<br>
+<form method="post" id="url_input">
+    {%  csrf_token %}
+    <div class="row1">
+            <div class="col">
+                <h6>URL-JSON</h6>
+
+    <input style="width: 600px; font-size: 12pt;" type="text" maxlength="100" value="" placeholder="type here URL...">
+    <button type="submit" value="submit" class="btn btn-info">Submit</button>
+            </div>
+    </div>
+</form>
+
+{%  endblock %}

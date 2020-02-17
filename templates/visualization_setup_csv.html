@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{%  block bodyPart %}
+<br>
+    <form id="visualization_setup_csv" method='post'>
+    {%  csrf_token %}
+     <div class="row1">
+            <div class="col">
+                <h6>CSV File Setup</h6>
+
+                uploaded CSV File attributes: <b>{{ csv_file.fieldnames}}</b>
+                <br><br>
+                <h6>Select date attribute</h6>
+                <select name="dropdown_date_csv" style="width: 400px">
+                {% for phrase in csv_file.fieldnames %}
+                    <option value="{{ phrase }}"{% if forloop.first %}selected{% endif %}>{{ phrase }}</option>
+                {% endfor %}
+                </select>
+{#    <input style="width: 600px; font-size: 12pt;" type="text" maxlength="100" value="date" placeholder="type here the name of your date attribute...">#}
+    <br><br>
+                <h6>Select value attribute</h6>
+                 <select name="dropdown_value_csv" style="width: 400px">
+                {% for phrase in csv_file.fieldnames %}
+                    <option value="{{ phrase }}"{% if forloop.last %}selected{% endif %}>{{ phrase }}</option>
+                {% endfor %}
+                </select>
+                <br><br> <h6>Select forecasting model</h6>
+                <select name="dropdown_models" style="width: 400px">
+{#                    <option value="arima"{% if selected_model == "arima" %}selected{% endif %}>ARIMA</option>#}
+                    <option value="prophet"{% if selected_model == "prophet" %}selected{% endif %}>PROPHET</option>
+            </select>
+            <button type="submit" name="submit_setup_csv" class="btn btn-info">Analyze</button>
+            </div>
+     </div>
+    </form>
+{%  endblock %}

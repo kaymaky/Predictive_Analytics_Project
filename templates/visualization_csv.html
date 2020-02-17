@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load blog_tags %}
+{%  block bodyPart %}
+
+{# ToDo convert CanvasJS in ChartJS#}
+
+
+    <br>
+    <br>
+  <script type="text/javascript">
+  window.onload = function () {
+      var chart = new CanvasJS.Chart("chartContainer",
+    {
+      zoomEnabled: true,
+
+      title:{
+       text: "Visual Analysis"
+     },
+
+     data: [
+     {
+      type: "line",
+      xValueType: "dateTime",
+      dataPoints: [
+          {% for date in dates.list_of_dates %}
+              { x: new Date({{ date }}), y: {{values|index:forloop.counter0}}}{% if forloop.revcounter0 != 0 %},{% endif %}
+          {% endfor %},
+      ]
+    },
+    {
+        type: "line",
+      xValueType: "dateTime",
+      lineColor: "red",
+      dataPoints: [
+          {% for date in forecast_dict.list_of_results_model_dates %}
+              { x: new Date({{ date }}), y: {{forecast_dict.list_of_resutls_model|index:forloop.counter0}}}{% if forloop.revcounter0 != 0 %},{% endif %}
+          {% endfor %},
+      ]
+    }
+    ]
+  });
+
+    chart.render();
+  }
+  </script>
+
+
+  <script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
+  <div id="chartContainer" style="height: 300px; width: 100%;">
+  </div>
+
+
+    <br>
+<ul>
+
+            <b>Next 20 Prediction:</b>
+             {% for predict in forecast_dict.list_of_results_predictions %}
+                 <li>{{ predict }}</li>
+            {% endfor %}
+
+
+
+        </ul>
+{% endblock %}

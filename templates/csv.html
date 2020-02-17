@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{%  block bodyPart %}
+<br>
+    <form enctype="multipart/form-data" method="post" id="csv_input">
+{%  csrf_token %}
+         <div class="row1">
+            <div class="col">
+                <h6>Upload a CSV File (*.csv)</h6>
+    <input name ="csv_file" type="file" size="100" accept=".csv" class="btn btn-light">
+    <button type="submit" value="submit" class="btn btn-info">Submit</button>
+            </div>
+         </div>
+{#    </form>#}
+    </form>
+
+{%  endblock %}
